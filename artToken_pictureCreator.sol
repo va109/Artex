@@ -434,6 +434,11 @@ contract artToken_pictureCreator {
         return (token_owner, token_author, token_price);
     }
 
+    function getTokenPrice2_start( bytes32 _hashToken ) constant returns (address, address, uint, uint){
+         var ( picOwner, picAuthor, token_price ) = getTokenPrice( _hashToken );
+         uint artToken_price = token_price * (10 ** uint(decimals));
+         return ( picOwner, picAuthor, token_price, artToken_price );
+    }
 
    //Создать токен
    function createPictureToken(address _author, bytes32 _hashPic, bytes32 _hashToken, bytes32 _hashDesc, bytes32 _price) private {
@@ -457,8 +462,8 @@ contract artToken_pictureCreator {
         address toNewOwner = _author;
 
         var ( picOwner, picAuthor, token_price ) = getTokenPrice( _hashToken );
-
-        require( _amount == token_price * decimals );
+        uint artToken_price = token_price * (10 ** uint(decimals));
+        require( _amount == artToken_price );
 
         uint artex_reward = _amount * artex_percent / 1000;
         uint author_reward = _amount * author_percent / 1000;
@@ -466,6 +471,8 @@ contract artToken_pictureCreator {
         contractArtToken.transfer( artexFund, artex_reward );
         contractArtToken.transfer( picAuthor, author_reward );
         contractArtToken.transfer( picOwner, owner_reward );
+
+        /*_amount;picAuthor;token_price;*/
 
         contractB.changePictureTokenOwner( _hashToken, picOwner, toNewOwner );
 
