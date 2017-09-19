@@ -1,5 +1,7 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.14;
 //Copyright by Kochergin Valery
+//MVP ver 0.08
+
 
 contract artToken {
       function transfer(address _to, uint256 _value);
