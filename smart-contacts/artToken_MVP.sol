@@ -1,4 +1,4 @@
-pragma solidity ^0.4.14;
+pragma solidity ^0.4.11;
 //Copyright by Kochergin Valery
 //MVP ver 0.08
 
